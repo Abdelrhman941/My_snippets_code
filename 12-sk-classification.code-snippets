@@ -1,0 +1,151 @@
+{
+    // Scikit-learn classification models and utilities
+    "Random Forest Classifier": {
+        "prefix": "sk-classify-random-forest",
+        "description": "Create and fit RandomForestClassifier model",
+        "body": [
+            "from sklearn.ensemble import RandomForestClassifier",
+            "",
+            "${1:rf_model} = RandomForestClassifier(",
+            "    n_estimators=${2:100},",
+            "    max_depth=${3:None},",
+            "    random_state=${4:42}",
+            ")",
+            "$1.fit(${5:X_train}, ${6:y_train})",
+            "",
+            "# Make predictions",
+            "y_pred = $1.predict(${7:X_test})",
+            "$0"
+        ]
+    },
+    "Logistic Regression": {
+        "prefix": "sk-classify-logistic-regression",
+        "description": "Create and fit LogisticRegression model",
+        "body": [
+            "from sklearn.linear_model import LogisticRegression",
+            "",
+            "${1:lr_model} = LogisticRegression(",
+            "    random_state=${2:42},",
+            "    max_iter=${3:1000}",
+            ")",
+            "$1.fit(${4:X_train}, ${5:y_train})",
+            "",
+            "# Make predictions",
+            "y_pred = $1.predict(${6:X_test})",
+            "$0"
+        ]
+    },
+    "Support Vector Classifier": {
+        "prefix": "sk-classify-svc",
+        "description": "Create and fit Support Vector Classifier model",
+        "body": [
+            "from sklearn.svm import SVC",
+            "",
+            "${1:svc_model} = SVC(",
+            "    kernel='${2|rbf,linear,poly,sigmoid|}',",
+            "    random_state=${3:42}",
+            ")",
+            "$1.fit(${4:X_train}, ${5:y_train})",
+            "",
+            "# Make predictions",
+            "y_pred = $1.predict(${6:X_test})",
+            "$0"
+        ]
+    },
+    "Gradient Boosting Classifier": {
+        "prefix": "sk-classify-gradient-boosting",
+        "description": "Create and fit GradientBoostingClassifier model",
+        "body": [
+            "from sklearn.ensemble import GradientBoostingClassifier",
+            "",
+            "${1:gb_model} = GradientBoostingClassifier(",
+            "    n_estimators=${2:100},",
+            "    learning_rate=${3:0.1},",
+            "    random_state=${4:42}",
+            ")",
+            "$1.fit(${5:X_train}, ${6:y_train})",
+            "",
+            "# Make predictions",
+            "y_pred = $1.predict(${7:X_test})",
+            "$0"
+        ]
+    },
+    "K-Neighbors Classifier": {
+        "prefix": "sk-classify-knn",
+        "description": "Create and fit K-Nearest Neighbors classifier",
+        "body": [
+            "from sklearn.neighbors import KNeighborsClassifier",
+            "",
+            "${1:knn_model} = KNeighborsClassifier(",
+            "    n_neighbors=${2:5}",
+            ")",
+            "$1.fit(${3:X_train}, ${4:y_train})",
+            "",
+            "# Make predictions",
+            "y_pred = $1.predict(${5:X_test})",
+            "$0"
+        ]
+    },
+    "Decision Tree Classifier": {
+        "prefix": "sk-classify-decision-tree",
+        "description": "Create and fit DecisionTreeClassifier model",
+        "body": [
+            "from sklearn.tree import DecisionTreeClassifier",
+            "",
+            "${1:dt_model} = DecisionTreeClassifier(",
+            "    max_depth=${2:None},",
+            "    random_state=${3:42}",
+            ")",
+            "$1.fit(${4:X_train}, ${5:y_train})",
+            "",
+            "# Make predictions",
+            "y_pred = $1.predict(${6:X_test})",
+            "$0"
+        ]
+    },
+    "Classification Report": {
+        "prefix": "sk-classify-report",
+        "description": "Generate classification report and confusion matrix",
+        "body": [
+            "from sklearn.metrics import classification_report, confusion_matrix, accuracy_score",
+            "import seaborn as sns",
+            "import matplotlib.pyplot as plt",
+            "",
+            "# Calculate accuracy",
+            "accuracy = accuracy_score(${1:y_test}, ${2:y_pred})",
+            "print(f'Accuracy: {accuracy:.4f}')",
+            "",
+            "# Classification report",
+            "print('\\nClassification Report:')",
+            "print(classification_report($1, $2))",
+            "",
+            "# Confusion matrix",
+            "cm = confusion_matrix($1, $2)",
+            "plt.figure(figsize=(8, 6))",
+            "sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')",
+            "plt.title('Confusion Matrix')",
+            "plt.ylabel('True Label')",
+            "plt.xlabel('Predicted Label')",
+            "plt.show()",
+            "$0"
+        ]
+    },
+    "Cross Validation": {
+        "prefix": "sk-classify-cross-validation",
+        "description": "Perform cross-validation on classifier",
+        "body": [
+            "from sklearn.model_selection import cross_val_score",
+            "",
+            "# Perform cross-validation",
+            "cv_scores = cross_val_score(",
+            "    ${1:model}, ${2:X}, ${3:y},",
+            "    cv=${4:5},",
+            "    scoring='${5|accuracy,precision,recall,f1|}'",
+            ")",
+            "",
+            "print(f'CV Scores: {cv_scores}')",
+            "print(f'Mean CV Score: {cv_scores.mean():.4f} (+/- {cv_scores.std() * 2:.4f})')",
+            "$0"
+        ]
+    }
+}

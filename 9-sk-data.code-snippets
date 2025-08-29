@@ -1,0 +1,43 @@
+{
+    // Scikit-learn data reading and loading utilities
+    "Read CSV": {
+        "prefix": "sk-read-csv",
+        "description": "Read CSV file into pandas DataFrame with basic info",
+        "body": [
+            "import pandas as pd",
+            "${1:df} = pd.read_csv('${2:data.csv}')",
+            "print($1.info())",
+            "$0"
+        ]
+    },
+    "Read Excel": {
+        "prefix": "sk-read-excel",
+        "description": "Read Excel file into pandas DataFrame with basic info",
+        "body": [
+            "import pandas as pd",
+            "${1:df} = pd.read_excel('${2:data.xlsx}')",
+            "print($1.info())",
+            "$0"
+        ]
+    },
+    "Read Feather": {
+        "prefix": "sk-read-feather",
+        "description": "Read Feather file into pandas DataFrame with basic info",
+        "body": [
+            "import pandas as pd",
+            "${1:df} = pd.read_feather('${2:data.feather}')",
+            "print($1.info())",
+            "$0"
+        ]
+    },
+    "Read Parquet": {
+        "prefix": "sk-read-parquet",
+        "description": "Read Parquet file into pandas DataFrame with basic info",
+        "body": [
+            "import pandas as pd",
+            "${1:df} = pd.read_parquet('${2:data.parquet}')",
+            "print($1.info())",
+            "$0"
+        ]
+    }
+}

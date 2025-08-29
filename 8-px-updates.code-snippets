@@ -1,0 +1,139 @@
+{
+    // Plotly Express figure updates and customization
+    "Update Marker": {
+        "prefix": "px-update-marker",
+        "description": "Update trace marker symbol, color and size",
+        "body": [
+            "${1:fig}.update_traces(",
+            "    marker=dict(",
+            "        symbol='${2|circle,square,diamond,cross,x,triangle-up,triangle-down,triangle,pentagon,hexagon,star|}',",
+            "        color='${3|blue,red,green,orange,purple,yellow,pink,cyan,magenta,black|}',",
+            "        size=${4:8}",
+            "    )",
+            ")",
+            "$0"
+        ]
+    },
+    "Update Text": {
+        "prefix": "px-update-text",
+        "description": "Update text position, font color, and font size",
+        "body": [
+            "${1:fig}.update_traces(",
+            "    textposition='${2|top center,top left,top right,middle center,middle left,middle right,bottom center,bottom left,bottom right|}',",
+            "    textfont=dict(",
+            "        color='${3|black,white,blue,red,green|}',",
+            "        size=${4:12}",
+            "    )",
+            ")",
+            "$0"
+        ]
+    },
+    "Update Margins": {
+        "prefix": "px-update-margin",
+        "description": "Update layout margins",
+        "body": [
+            "${1:fig}.update_layout(",
+            "    margin=dict(",
+            "        l=${2:50},",
+            "        r=${3:50},",
+            "        t=${4:50},",
+            "        b=${5:50}",
+            "    )",
+            ")",
+            "$0"
+        ]
+    },
+    "Add Range Slider": {
+        "prefix": "px-update-rangeslider",
+        "description": "Add a rangeslider to the x-axis layout",
+        "body": [
+            "${1:fig}.update_layout(",
+            "    xaxis=dict(",
+            "        rangeslider=dict(visible=${2|True,False|})",
+            "    )",
+            ")",
+            "$0"
+        ]
+    },
+    "Add Range Selector": {
+        "prefix": "px-update-rangeselector",
+        "description": "Add rangeselector buttons to the x-axis layout",
+        "body": [
+            "${1:fig}.update_layout(",
+            "    xaxis=dict(",
+            "        rangeselector=dict(",
+            "            buttons=list([",
+            "                dict(count=1, label=\"1m\", step=\"month\", stepmode=\"backward\"),",
+            "                dict(count=6, label=\"6m\", step=\"month\", stepmode=\"backward\"),",
+            "                dict(count=1, label=\"YTD\", step=\"year\", stepmode=\"todate\"),",
+            "                dict(count=1, label=\"1y\", step=\"year\", stepmode=\"backward\"),",
+            "                dict(step=\"all\")",
+            "            ])",
+            "        )",
+            "    )",
+            ")",
+            "$0"
+        ]
+    },
+    "Fix Scale Ratio": {
+        "prefix": "px-update-scaleratio",
+        "description": "Fix scale ratio between x and y axes at 1:1",
+        "body": [
+            "${1:fig}.update_layout(",
+            "    yaxis=dict(scaleanchor=\"x\", scaleratio=1)",
+            ")",
+            "$0"
+        ]
+    },
+    "Set Axis Auto Range": {
+        "prefix": "px-update-autorange",
+        "description": "Configure axis autorange",
+        "body": [
+            "${1:fig}.update_layout(",
+            "    xaxis=dict(autorange=${2|True,False,'reversed'|}),",
+            "    yaxis=dict(autorange=${3|True,False,'reversed'|})",
+            ")",
+            "$0"
+        ]
+    },
+    "Update 3D Scene Aspect Ratio": {
+        "prefix": "px-update-scene-aspectratio",
+        "description": "Update 3D scene aspect ratio",
+        "body": [
+            "${1:fig}.update_layout(",
+            "    scene=dict(",
+            "        aspectratio=dict(",
+            "            x=${2:1},",
+            "            y=${3:1},",
+            "            z=${4:1}",
+            "        )",
+            "    )",
+            ")",
+            "$0"
+        ]
+    },
+    "Update 3D Scene Aspect Mode": {
+        "prefix": "px-update-scene-aspectmode",
+        "description": "Update 3D scene aspect mode",
+        "body": [
+            "${1:fig}.update_layout(",
+            "    scene=dict(",
+            "        aspectmode='${2|auto,cube,data,manual|}'",
+            "    )",
+            ")",
+            "$0"
+        ]
+    },
+    "Hide Scatter Matrix Parts": {
+        "prefix": "px-update-scattermatrix-parts",
+        "description": "Hide diagonal and/or lower/upper triangle of scatter matrix",
+        "body": [
+            "${1:fig}.update_traces(",
+            "    diagonal_visible=${2|False,True|},",
+            "    showupperhalf=${3|True,False|},",
+            "    showlowerhalf=${4|True,False|}",
+            ")",
+            "$0"
+        ]
+    }
+}

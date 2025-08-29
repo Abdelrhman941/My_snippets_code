@@ -1,0 +1,146 @@
+{
+"Data Generation and Datasets": {
+    "prefix": "imp: datasets",
+    "body": [
+        "# references:",
+        "# https://scikit-learn.org/stable/datasets.html",
+        "# https://scikit-learn.org/stable/api/sklearn.datasets.html#module-sklearn.datasets",
+        "",
+        "from sklearn.datasets import load_iris, load_breast_cancer, load_digits, make_classification, make_moons, make_circles, fetch_california_housing",
+        "from sklearn import datasets"
+    ],
+    "description": "Imports for loading sample datasets and generating synthetic data for testing."
+},
+// ================================================================================================================================
+"Basic Imports": {
+    "prefix": "imp: basic",
+    "body": [
+        "import numpy as np",
+        "import pandas as pd",
+        "import matplotlib.pyplot as plt",
+        "import seaborn as sns",
+        "import plotly.express as px",
+        "import plotly.graph_objects as go",
+        "import missingno as msno",
+        "from matplotlib import cm",
+        "from IPython.display import clear_output"
+    ],
+    "description": "Core imports for data manipulation, visualization, and styling"
+},
+// ================================================================================================================================
+"Preprocessing Imports": {
+    "prefix": "imp: preprocessing",
+    "body": [
+        "from sklearn.preprocessing import OneHotEncoder, LabelEncoder, OrdinalEncoder, StandardScaler, MinMaxScaler, RobustScaler, PowerTransformer, PolynomialFeatures",
+        "from sklearn.impute import SimpleImputer",
+        "from sklearn.compose import ColumnTransformer, make_column_transformer",
+        "from category_encoders import CountEncoder, TargetEncoder, BinaryEncoder",
+        "from pandas.api.types import is_numeric_dtype, is_object_dtype, CategoricalDtype"
+    ],
+    "description": "Imports for data preprocessing, including encoding, scaling, imputation, and column transformation."
+},
+// ================================================================================================================================
+"Data Splitting & CrossV Imports": {
+    "prefix": "imp: splitting",
+    "body": [
+        "from sklearn.model_selection import train_test_split, GridSearchCV, RandomizedSearchCV, KFold, StratifiedKFold, cross_val_score, cross_validate, validation_curve"
+    ],
+    "description": "Imports for splitting datasets and performing cross-validation or hyperparameter tuning."
+},
+// ================================================================================================================================
+"Regression Imports": {
+    "prefix": "imp: regression",
+    "body": [
+        "from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet",
+        "from sklearn.neighbors import KNeighborsRegressor",
+        "from sklearn.tree import DecisionTreeRegressor",
+        "from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor, GradientBoostingRegressor",
+        "from xgboost import XGBRegressor"
+    ],
+    "description": "Imports for regression algorithms, including linear, tree-based, and ensemble models."
+},
+// ================================================================================================================================
+"Classification Imports": {
+    "prefix": "imp: classification",
+    "body": [
+        "from sklearn.linear_model import LogisticRegression, SGDClassifier",
+        "from sklearn.neighbors import KNeighborsClassifier",
+        "from sklearn.tree import DecisionTreeClassifier",
+        "from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, GradientBoostingClassifier, BaggingClassifier, VotingClassifier, StackingClassifier",
+        "from sklearn.svm import SVC",
+        "from xgboost import XGBClassifier",
+        "from sklearn.multioutput import MultiOutputClassifier, OneVsRestClassifier",
+        "from imblearn.ensemble import EasyEnsembleClassifier"
+    ],
+    "description": "Imports for classification algorithms, including linear, tree-based, ensemble, and specialized models."
+},
+// ================================================================================================================================
+"Clustering & DimR Imports": {
+    "prefix": "imp: clustering",
+    "body": [
+        "from sklearn.cluster import KMeans, DBSCAN, AgglomerativeClustering",
+        "from sklearn.mixture import GaussianMixture",
+        "from sklearn.decomposition import PCA",
+        "from scipy.cluster.hierarchy import dendrogram, linkage",
+        "from sklearn.ensemble import IsolationForest"
+    ],
+    "description": "Imports for clustering algorithms and dimensionality reduction techniques."
+},
+// ================================================================================================================================
+"Imbalanced Imports": {
+    "prefix": "imp: imbalanced",
+    "body": [
+        "from imblearn.over_sampling import SMOTE, RandomOverSampler, ADASYN, BorderlineSMOTE, KMeansSMOTE, SVMSMOTE",
+        "from imblearn.under_sampling import RandomUnderSampler, NearMiss",
+        "from imblearn.combine import SMOTETomek, SMOTEENN",
+        "from collections import Counter"
+    ],
+    "description": "Imports for handling imbalanced datasets with oversampling, undersampling, and hybrid techniques."
+},
+// ================================================================================================================================
+"Evaluation Metrics Imports": {
+    "prefix": "imp: metrics",
+    "body": [
+        "from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, roc_curve, auc, classification_report, confusion_matrix, ConfusionMatrixDisplay, r2_score, mean_squared_error, mean_absolute_error",
+        "from sklearn.metrics.pairwise import euclidean_distances, manhattan_distances, cosine_distances",
+        "from sklearn.metrics import silhouette_score, mutual_info_score"
+    ],
+    "description": "Imports for evaluating model performance, including classification, regression, and clustering metrics."
+},
+// ================================================================================================================================
+"Stats & Math Imports": {
+    "prefix": "imp: stats",
+    "body": [
+        "from scipy import stats",
+        "from scipy.stats import boxcox, skew, pearsonr, spearmanr",
+        "from sklearn.feature_selection import SelectKBest, f_classif"
+    ],
+    "description": "Imports for statistical analysis and feature selection."
+},
+// ================================================================================================================================
+"Miscellaneous Imports": {
+    "prefix": "imp: utils",
+    "body": [
+        "import gc",
+        "import time",
+        "import sys",
+        "import json",
+        "import yaml",
+        "import requests",
+        "from itertools import zip_longest",
+        "from sklearn.utils import resample",
+        "from sklearn.base import BaseEstimator, TransformerMixin",
+        "from tqdm.auto import tqdm"
+    ],
+    "description": "Utility imports for memory management, warnings, timing, and custom transformers."
+},
+// ================================================================================================================================
+"Warnings Imports": {
+    "prefix": "imp: warnings",
+    "body": [
+        "import warnings",
+        "warnings.filterwarnings('ignore')"
+            ],
+    "description": "Import warnings module and set to ignore warnings."
+}
+}

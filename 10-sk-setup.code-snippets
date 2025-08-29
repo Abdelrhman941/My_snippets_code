@@ -1,0 +1,26 @@
+{
+    // Scikit-learn setup and initialization
+    "Setup Sklearn": {
+        "prefix": "sk-setup",
+        "description": "Import common scikit-learn modules and set up environment",
+        "body": [
+            "import numpy as np",
+            "import pandas as pd",
+            "import matplotlib.pyplot as plt",
+            "import seaborn as sns",
+            "",
+            "# Core sklearn imports",
+            "from sklearn.model_selection import train_test_split",
+            "from sklearn.preprocessing import StandardScaler",
+            "from sklearn.metrics import classification_report, confusion_matrix",
+            "",
+            "# Set random state for reproducibility",
+            "RANDOM_STATE = ${1:42}",
+            "",
+            "# Set matplotlib style",
+            "plt.style.use('${2|default,seaborn,ggplot,bmh,fivethirtyeight|}')",
+            "",
+            "$0"
+        ]
+    }
+}

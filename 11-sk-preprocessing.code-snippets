@@ -1,0 +1,97 @@
+{
+    // Scikit-learn data preprocessing and feature engineering
+    "Train Test Split": {
+        "prefix": "sk-prep-train_test_split",
+        "description": "Split dataset into training and testing sets",
+        "body": [
+            "from sklearn.model_selection import train_test_split",
+            "",
+            "X_train, X_test, y_train, y_test = train_test_split(",
+            "    ${1:X}, ${2:y},",
+            "    test_size=${3:0.2},",
+            "    random_state=${4:42},",
+            "    stratify=${5:None}",
+            ")",
+            "",
+            "print(f'Training set size: {X_train.shape[0]}')",
+            "print(f'Test set size: {X_test.shape[0]}')",
+            "$0"
+        ]
+    },
+    "Standard Scaler": {
+        "prefix": "sk-prep-standard-scaler",
+        "description": "Apply standard scaling to features",
+        "body": [
+            "from sklearn.preprocessing import StandardScaler",
+            "",
+            "${1:scaler} = StandardScaler()",
+            "X_train_scaled = $1.fit_transform(${2:X_train})",
+            "X_test_scaled = $1.transform(${3:X_test})",
+            "$0"
+        ]
+    },
+    "MinMax Scaler": {
+        "prefix": "sk-prep-minmax-scaler",
+        "description": "Apply min-max scaling to features",
+        "body": [
+            "from sklearn.preprocessing import MinMaxScaler",
+            "",
+            "${1:scaler} = MinMaxScaler()",
+            "X_train_scaled = $1.fit_transform(${2:X_train})",
+            "X_test_scaled = $1.transform(${3:X_test})",
+            "$0"
+        ]
+    },
+    "OneHot Encoder": {
+        "prefix": "sk-prep-onehot-encoder",
+        "description": "Apply one-hot encoding to categorical features",
+        "body": [
+            "from sklearn.preprocessing import OneHotEncoder",
+            "",
+            "${1:encoder} = OneHotEncoder(sparse_output=False, drop='first')",
+            "${2:X_encoded} = $1.fit_transform(${3:X_categorical})",
+            "$0"
+        ]
+    },
+    "Label Encoder": {
+        "prefix": "sk-prep-label-encoder",
+        "description": "Apply label encoding to categorical target variable",
+        "body": [
+            "from sklearn.preprocessing import LabelEncoder",
+            "",
+            "${1:encoder} = LabelEncoder()",
+            "${2:y_encoded} = $1.fit_transform(${3:y})",
+            "$0"
+        ]
+    },
+    "Column Transformer": {
+        "prefix": "sk-prep-column-transformer",
+        "description": "Create column transformer for mixed data types",
+        "body": [
+            "from sklearn.compose import ColumnTransformer",
+            "from sklearn.preprocessing import StandardScaler, OneHotEncoder",
+            "",
+            "${1:preprocessor} = ColumnTransformer(",
+            "    transformers=[",
+            "        ('num', StandardScaler(), ${2:numeric_columns}),",
+            "        ('cat', OneHotEncoder(drop='first'), ${3:categorical_columns})",
+            "    ]",
+            ")",
+            "",
+            "X_train_processed = $1.fit_transform(${4:X_train})",
+            "X_test_processed = $1.transform(${5:X_test})",
+            "$0"
+        ]
+    },
+    "Simple Imputer": {
+        "prefix": "sk-prep-simple-imputer",
+        "description": "Impute missing values with simple strategy",
+        "body": [
+            "from sklearn.impute import SimpleImputer",
+            "",
+            "${1:imputer} = SimpleImputer(strategy='${2|mean,median,most_frequent,constant|}')",
+            "${3:X_imputed} = $1.fit_transform(${4:X})",
+            "$0"
+        ]
+    }
+}
