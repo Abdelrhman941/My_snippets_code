@@ -30,6 +30,7 @@
     "description": "Core imports for data manipulation, visualization, and styling"
 },
 // ================================================================================================================================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Preprocessing Imports": {
     "prefix": "imp: preprocessing",
     "body": [
@@ -42,6 +43,7 @@
     "description": "Imports for data preprocessing, including encoding, scaling, imputation, and column transformation."
 },
 // ================================================================================================================================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Data Splitting & CrossV Imports": {
     "prefix": "imp: splitting",
     "body": [
@@ -50,6 +52,7 @@
     "description": "Imports for splitting datasets and performing cross-validation or hyperparameter tuning."
 },
 // ================================================================================================================================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Regression Imports": {
     "prefix": "imp: regression",
     "body": [
@@ -62,6 +65,7 @@
     "description": "Imports for regression algorithms, including linear, tree-based, and ensemble models."
 },
 // ================================================================================================================================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Classification Imports": {
     "prefix": "imp: classification",
     "body": [
@@ -78,6 +82,7 @@
     "description": "Imports for classification algorithms, including linear, tree-based, ensemble, and specialized models."
 },
 // ================================================================================================================================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Clustering & DimR Imports": {
     "prefix": "imp: clustering",
     "body": [
@@ -90,6 +95,7 @@
     "description": "Imports for clustering algorithms and dimensionality reduction techniques."
 },
 // ================================================================================================================================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Imbalanced Imports": {
     "prefix": "imp: imbalanced",
     "body": [
@@ -101,6 +107,7 @@
     "description": "Imports for handling imbalanced datasets with oversampling, undersampling, and hybrid techniques."
 },
 // ================================================================================================================================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Evaluation Metrics Imports": {
     "prefix": "imp: metrics",
     "body": [
@@ -111,6 +118,7 @@
     "description": "Imports for evaluating model performance, including classification, regression, and clustering metrics."
 },
 // ================================================================================================================================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Stats & Math Imports": {
     "prefix": "imp: stats",
     "body": [
@@ -121,6 +129,7 @@
     "description": "Imports for statistical analysis and feature selection."
 },
 // ================================================================================================================================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Miscellaneous Imports": {
     "prefix": "imp: utils",
     "body": [
@@ -138,6 +147,7 @@
     "description": "Utility imports for memory management, warnings, timing, and custom transformers."
 },
 // ================================================================================================================================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Warnings Imports": {
     "prefix": "imp: warnings",
     "body": [
