@@ -676,5 +676,38 @@
 },
 // =========================
 // ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
-
+"skew analysis": {
+    "prefix": "eda: skew",
+    "description": "Analyze skewness of numeric features and optionally visualize log transformation effect.",
+    "body": [
+        "# Calculate skewness for numeric features",
+        "skew_df = df[numeric_features].skew().to_frame(name='Feature Skewness')",
+        "skew_df['Feature Skewness'] = skew_df['Feature Skewness'].round(3)",
+        "",
+        "# Highlight highly skewed features (|skew| > 1)",
+        "def highlight_skew(s):",
+        "    is_skewed = s.abs() > 1",
+        "    return ['background-color: red' if v else '' for v in is_skewed]",
+        "",
+        "styled_skew_df = skew_df.style.apply(highlight_skew, subset=['Feature Skewness'])",
+        "styled_skew_df",
+        "",
+        "# Optional: visualize log transformation effect for a feature",
+        "# old_val = df['feature']",
+        "# df['feature'] = np.log1p(df['feature'])  # log(1+x) to handle zeros",
+        "#",
+        "# import matplotlib.pyplot as plt",
+        "# import seaborn as sns",
+        "# plt.figure(figsize=(13,6))",
+        "# plt.subplot(1,2,1)",
+        "# sns.histplot(old_val, color='purple', kde=True)",
+        "# plt.title('Feature Distribution Before Transformation', fontweight='black', size=18, pad=20)",
+        "#",
+        "# plt.subplot(1,2,2)",
+        "# sns.histplot(df['feature'], color='purple', kde=True)",
+        "# plt.title('Feature Distribution After Transformation', fontweight='black', size=18, pad=20)",
+        "# plt.tight_layout()",
+        "# plt.show()"
+    ]
+}
 }
