@@ -1,58 +1,347 @@
 {
-    // Scikit-learn data reading and loading utilities
-    // ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
-    "Read CSV": {
-        "prefix": "read: sk-read-csv",
-        "description": "Read CSV file into pandas DataFrame with key parameters",
-        "body": [
-            "# 🔹 Commonly used parameters in pd.read_csv:",
-            "# sep=','              -> Column separator (',' default, use '\\t' for TSV)",
-            "# header=0             -> Row of column names (None if no header)",
-            "# names=[...]          -> Define column names manually",
-            "# index_col=0          -> Column to use as index",
-            "# usecols=[...]        -> Load only specific columns",
-            "# nrows=1000           -> Read only first N rows",
-            "# skiprows=5           -> Skip first 5 rows (or list of rows)",
-            "# na_values=['?']      -> Extra strings to treat as NaN",
-            "# dtype={'col': str}   -> Force data type for column",
-            "# parse_dates=['col']  -> Parse column(s) as datetime",
-            "# dayfirst=True        -> Dates in dd/mm/yyyy format",
-            "# encoding='utf-8'     -> File encoding ('latin1', 'cp1256' for Arabic)",
-            "# compression='zip'    -> If file is compressed",
-            "# chunksize=10000      -> Read file in chunks (returns iterator)",
-            "# on_bad_lines='skip'  -> Skip bad/invalid rows",
-            "",
-            "${1:df} = pd.read_csv('${2:data.csv}')",
-            "$1.head()",
-            "$0"
-        ]
-    },
-    //---------------------------------------------------------------------------------------------------------------
-    "Read Excel": {
-        "prefix": "read: sk-read-excel",
-        "description": "Read Excel file into pandas DataFrame with basic info",
-        "body": [
-            "${1:df} = pd.read_excel('${2:data.xlsx}')",
-            "print($1.info())",
-            "$0"
-        ]
-    },
-    "Read Feather": {
-        "prefix": "read: sk-read-feather",
-        "description": "Read Feather file into pandas DataFrame with basic info",
-        "body": [
-            "${1:df} = pd.read_feather('${2:data.feather}')",
-            "print($1.info())",
-            "$0"
-        ]
-    },
-    "Read Parquet": {
-        "prefix": "read: sk-read-parquet",
-        "description": "Read Parquet file into pandas DataFrame with basic info",
-        "body": [
-            "${1:df} = pd.read_parquet('${2:data.parquet}')",
-            "print($1.info())",
-            "$0"
-        ]
-    }
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+"Read CSV": {
+    "prefix": "read: sk-read-csv",
+    "description": "Read CSV file into pandas DataFrame with key parameters",
+    "body": [
+        "# 🔹 Commonly used parameters in pd.read_csv:",
+        "# sep=','              -> Column separator (',' default, use '\\t' for TSV)",
+        "# header=0             -> Row of column names (None if no header)",
+        "# names=[...]          -> Define column names manually",
+        "# index_col=0          -> Column to use as index",
+        "# usecols=[...]        -> Load only specific columns",
+        "# nrows=1000           -> Read only first N rows",
+        "# skiprows=5           -> Skip first 5 rows (or list of rows)",
+        "# na_values=['?']      -> Extra strings to treat as NaN",
+        "# dtype={'col': str}   -> Force data type for column",
+        "# parse_dates=['col']  -> Parse column(s) as datetime",
+        "# dayfirst=True        -> Dates in dd/mm/yyyy format",
+        "# encoding='utf-8'     -> File encoding ('latin1', 'cp1256' for Arabic)",
+        "# compression='zip'    -> If file is compressed",
+        "# chunksize=10000      -> Read file in chunks (returns iterator)",
+        "# on_bad_lines='skip'  -> Skip bad/invalid rows",
+        "",
+        "${1:df} = pd.read_csv('${2:data.csv}')",
+        "$1.head()",
+    ]
+},
+// =========================
+"Read Excel": {
+    "prefix": "read: sk-read-excel",
+    "description": "Read Excel file into pandas DataFrame with basic info",
+    "body": [
+        "${1:df} = pd.read_excel('${2:data.xlsx}')",
+        "print($1.info())",
+    ]
+},
+// =========================
+"Read Feather": {
+    "prefix": "read: sk-read-feather",
+    "description": "Read Feather file into pandas DataFrame with basic info",
+    "body": [
+        "${1:df} = pd.read_feather('${2:data.feather}')",
+        "print($1.info())",
+    ]
+},
+// =========================
+"Read Parquet": {
+    "prefix": "read: sk-read-parquet",
+    "description": "Read Parquet file into pandas DataFrame with basic info",
+    "body": [
+        "${1:df} = pd.read_parquet('${2:data.parquet}')",
+        "print($1.info())",
+    ]
+},
+// ================================================================================================================================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+"Basic EDA Summary": {
+    "prefix": "eda: (1) Quick",
+    "description": "Perform basic exploratory data analysis (EDA) on a DataFrame, including shape, columns, info, summary stats, unique values, missing values, and duplicates",
+    "body": [
+        "display(df.shape)",
+        "display(df.columns.tolist())",
+        "display(df.info(memory_usage='deep'))",
+        "display(df.describe().T)",
+        "display(df.describe(include='object').T)",
+        "display(df.nunique().sort_values(ascending=False))",
+        "display(df.isnull().sum())",
+        "display(df.duplicated().sum())",
+        "df.drop_duplicates(inplace=True)",
+        "",
+        "# -----------------------------------------------------------------------",
+        "# -------------- Commonly used parameters in df.describe() --------------",
+        "# -----------------------------------------------------------------------",
+        "",
+        "# percentiles=[.1, .9]  ->  Custom quantiles (default [.25, .5, .75])",
+        "# include='all'         ->  Show all columns (numeric + object + category)",
+        "# include=['object']    ->  Show only categorical/text columns",
+        "# exclude=['number']    ->  Exclude numeric columns",
+    ]
+},
+// =========================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+"Drop columns or rows from DataFrame": {
+    "prefix": "eda: Drop",
+    "description": "Drop columns or rows from DataFrame",
+    "body": [
+        "# 🔹 Commonly used parameters in df.drop():",
+        "# labels=['col']   ->  Column(s) or row(s) to drop",
+        "# axis=1           ->  Drop columns (axis=0 for rows)",
+        "# inplace=True     ->  Apply change directly to df",
+        "# errors='ignore'  ->  Avoid error if label not found",
+        "",
+        "${1:df}.drop(labels=['${2:col_name}'], axis=1, inplace=True)"
+    ]
+},
+// ================================================================================================================================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+"Target Distribution Plot": {
+    "prefix": "eda: (2) target-distribution",
+    "description": "Plot target distribution for classification or regression with optional log scale for classification",
+    "body": [
+        "def target_distribution(df, target, task, title='Target Distribution', color=['skyblue', 'salmon'], Log=None):",
+        "    if task == 'classification':",
+        "        counts = df[target].value_counts()",
+        "        balance_ratio = counts.max() / counts.min() if counts.min() > 0 else float('inf')",
+        "        print(f\"Balance Ratio: {balance_ratio:.2f} (1.0 = perfectly balanced)\")",
+        "        counts.plot(kind='bar', color=color)",
+        "        ax = sns.barplot(x=counts.index, y=counts.values, palette=color)",
+        "        for p in ax.patches:",
+        "            ax.annotate(f\"{int(p.get_height()):,}\", (p.get_x() + p.get_width() / 2., p.get_height()), ha='center', va='bottom', fontsize=10, color=\"black\", xytext=(0, 3), textcoords='offset points')",
+        "        plt.xticks(rotation=0)",
+        "        if Log:",
+        "            plt.yscale('log')",
+        "        ax.set_title(title, fontsize=14, weight='bold')",
+        "        plt.xlabel(target)",
+        "        plt.ylabel('Count')",
+        "        plt.show()",
+        "",
+        "    elif task == 'regression':",
+        "        sns.set_theme()",
+        "        sns.histplot(df[target], kde=True, bins=30)",
+        "        plt.title(title)",
+        "        plt.xlabel(target)",
+        "        plt.ylabel('Count')",
+        "        plt.show()",
+        "",
+        "target_distribution(df, '${1:Exited}', task='${2:classification}', Log=${3:None})"
+    ]
+},
+// =========================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+
+// =========================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+"Get Column Types Summary": {
+    "prefix": "eda: (3) col-types",
+    "description": "Identify numerical and categorical columns in DataFrame with summary",
+    "body": [
+    "def get_column_types(df, numerics=[np.number], show_summary=True):",
+    "    \"\"\"Identify numerical and categorical columns in a DataFrame.\"\"\"",
+    "    from itertools import zip_longest",
+    "    ",
+    "    # Numeric columns",
+    "    numerical_columns = df.select_dtypes(include=numerics).columns.tolist()",
+    "    ",
+    "    # Categorical columns",
+    "    categorical_columns = df.select_dtypes(exclude=numerics).columns.tolist()",
+    "    ",
+    "    if show_summary:",
+    "        print(f\"Column Type Summary:\")",
+    "        print(f\"   Numerical   : {len(numerical_columns)} columns\")",
+    "        print(f\"   Categorical : {len(categorical_columns)} columns\")",
+    "        print(f\"   Total       : {len(df.columns)} columns\")",
+    "        ",
+    "        print(\"\\n Numerical Columns                                     | Categorical Columns\")",
+    "        print(\"==========================================================================================\")",
+    "        for i, (num, cat) in enumerate(zip_longest(numerical_columns, categorical_columns, fillvalue='')):",
+    "            print(f\"{i+1:2d}. {num:<50} | {cat:<28}\")",
+    "    ",
+    "    return numerical_columns, categorical_columns",
+    "",
+    "############################################################################",
+    "numerical_cols, categorical_cols = get_column_types(df)",
+    ] 
+},
+// =========================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+"Plot Numeric Distributions (1)": {
+    "prefix": "eda: (4.1) numeric-distribution",
+    "description": "Plot distributions of numeric features (countplot for discrete, KDE for continuous)",
+    "body": [
+    "def plot_numeric_distributions(df, numeric_features, threshold=20, cols_per_row=3):",
+    "    # Calculate required rows",
+    "    n_rows = (len(numeric_features) + cols_per_row - 1) // cols_per_row",
+    "    plt.figure(figsize=(15, 5 * n_rows))",
+    "    ",
+    "    for i, col in enumerate(numeric_features):",
+    "        plt.subplot(n_rows, cols_per_row, i + 1)",
+    "        unique_vals = df[col].nunique()",
+    "        ",
+    "        # If column has <= threshold unique values → Discrete",
+    "        if unique_vals <= threshold:",
+    "            sns.countplot(x=col, data=df)",
+    "            plt.title(f'{col} Countplot (Discrete)')",
+    "        else:",
+    "            # Otherwise consider it Continuous",
+    "            sns.kdeplot(df[col], fill=True)",
+    "            plt.title(f'{col} KDE Plot (Continuous)')",
+    "    ",
+    "    plt.tight_layout()",
+    "    plt.show()",
+    "    plt.close()",
+    "",
+    "plot_numeric_distributions(df, numeric_features)",
+    ]
+},
+// =========================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+"Plot Numeric Distributions (2)": {
+    "prefix": "eda: (4.2) numeric_grid",
+    "description": "Plot distributions of numeric features in a grid layout",
+    "body": [
+        "def plot_numeric_distributions_grid(df, numeric_features, cols_per_row=3, bins=30, rotation=0):",
+        "    # Calculate required rows",
+        "    n_rows = (len(numeric_features) + cols_per_row - 1) // cols_per_row",
+        "    plt.figure(figsize=(5 * cols_per_row, 4 * n_rows))",
+        "    ",
+        "    for i, col in enumerate(numeric_features):",
+        "        plt.subplot(n_rows, cols_per_row, i + 1)",
+        "        sns.histplot(df[col], kde=True, bins=bins)",
+        "        plt.title(f'{col} Distribution')",
+        "        plt.xticks(rotation=rotation)",
+        "    ",
+        "    plt.tight_layout()",
+        "    plt.show()",
+        "",
+        "plot_numeric_distributions_grid(df, numeric_features, cols_per_row=4, bins=50, rotation=45)",
+
+    ]
+},
+// =========================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+"eda: (5) missing_df": {
+    "prefix": "eda: (5) missing_df",
+    "description": "Show data quality with missing values count, percentage, and colored type column",
+    "body": [
+    "def data_quality(df):",
+    "    from pandas.api.types import is_numeric_dtype, is_object_dtype, CategoricalDtype",
+    "    missing = df.isnull().sum()",
+    "    missing_per = (missing / len(df)) * 100",
+    "    missing_df = pd.DataFrame({",
+    "        \"Missing_Count\"     : missing,",
+    "        \"Missing_Percentage\": missing_per,",
+    "        \"Column_Type\"       : [\"Numeric\" if is_numeric_dtype(df[c]) else \"Categorical\" if (is_object_dtype(df[c]) or isinstance(df[c].dtype, CategoricalDtype)) else \"Other\" for c in df.columns]",
+    "    }).query(\"Missing_Count > 0\").sort_values(\"Missing_Percentage\", ascending=False)",
+    "    if not missing_df.empty:",
+    "        def color_column_type(val):",
+    "            if val == \"Numeric\":",
+    "                return \"background-color:#D6EAF8; color:#1B4F72; font-weight:bold;\"",
+    "            elif val == \"Categorical\":",
+    "                return \"background-color:#FADBD8; color:#641E16; font-weight:bold;\"",
+    "            elif val == \"Datetime\":",
+    "                return \"background-color:#E8F6F3; color:#0B5345; font-weight:bold;\"",
+    "            else:",
+    "                return \"background-color:#FDF2E9; color:#7D6608; font-weight:bold;\"",
+    "        styled_df = (missing_df.style.applymap(color_column_type, subset=[\"Column_Type\"])",
+    "                            .background_gradient(subset=[\"Missing_Percentage\"], cmap=\"Oranges\")",
+    "                            .format({\"Missing_Count\": \"{:.0f}\", \"Missing_Percentage\": \"{:.2f}%\"}))",
+    "        display(styled_df)",
+    "    else:",
+    "        print(\"No missing values detected.\")",
+    "    return missing_df",
+    "",
+    "missing_df = data_quality(df)"
+    ]
+},
+// =========================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+"eda: (6) corr-matrix": {
+    "prefix": "eda: (6) corr-matrix",
+    "description": "Plot correlation matrix heatmap with optional column removal and high correlation analysis",
+    "body": [
+    "def plot_corr_matrix(df, continuous_columns=None, target: str = None, method: str = \"pearson\",",
+    "                    figsize: tuple = (15, 8), cmap: str = \"coolwarm\", linewidths: float = 0.5,",
+    "                    square: bool = True, fmt: str = \".2f\", mask: bool = False, annot: bool = True,",
+    "                    title: str = None, threshold: float = 0.8, remove_target: str = None):",
+    "    \"\"\"",
+    "    Extended to also print high correlations with target and between features.",
+    "    Optionally remove a column (e.g., target) from correlation matrix.",
+    "    \"\"\"",
+    "    if continuous_columns is None:",
+    "        continuous_columns = df.select_dtypes(include=[np.number]).columns.tolist()",
+    "    cols = continuous_columns.copy()",
+    "    if remove_target and remove_target in cols:",
+    "        cols.remove(remove_target)",
+    "    corr_matrix = df[cols].corr(method=method)",
+    "    mask_matrix = np.triu(np.ones_like(corr_matrix, dtype=bool)) if mask else None",
+    "    if title is None:",
+    "        title = f\"Correlation Matrix ({method})\"",
+    "    plt.figure(figsize=figsize)",
+    "    sns.heatmap(corr_matrix, annot=annot, fmt=fmt, cmap=cmap, linewidths=linewidths, square=square, mask=mask_matrix, cbar_kws={\"shrink\": 0.8})",
+    "    plt.grid(False)",
+    "    plt.title(title, fontsize=14)",
+    "    plt.tight_layout()",
+    "    plt.show()",
+    "    ",
+    "    results = {}",
+    "    print(\"=\"*60)",
+    "    print(f\" High Correlations (threshold ≥ {threshold}) \")",
+    "    print(\"=\"*60)",
+    "    if target is not None and target in corr_matrix.columns:",
+    "        target_corr = corr_matrix[target].drop(target).dropna()",
+    "        strong_target_corr = target_corr[abs(target_corr) >= threshold]",
+    "        if not strong_target_corr.empty:",
+    "            print(\"\\n🔹 Feature ←→ Target:\")",
+    "            for feat, val in strong_target_corr.items():",
+    "                print(f\"{feat}  ←→ {target} : {val:.3f}\")",
+    "        results[\"target_corr\"] = strong_target_corr",
+    "    else:",
+    "        results[\"target_corr\"] = None",
+    "    high_corr_pairs = []",
+    "    for i in range(len(corr_matrix.columns)):",
+    "        for j in range(i+1, len(corr_matrix.columns)):",
+    "            col1, col2 = corr_matrix.columns[i], corr_matrix.columns[j]",
+    "            corr_val = corr_matrix.iloc[i, j]",
+    "            if abs(corr_val) >= threshold:",
+    "                high_corr_pairs.append((col1, col2, corr_val))",
+    "    if high_corr_pairs:",
+    "        print(\"\\n🔹 Feature ←→ Feature:\")",
+    "        for col1, col2, val in sorted(high_corr_pairs, key=lambda x: abs(x[2]), reverse=True):",
+    "            print(f\"{col1} ←→ {col2} : {val:.3f}\")",
+    "    results[\"high_corr_pairs\"] = high_corr_pairs",
+    "    results[\"corr_matrix\"] = corr_matrix",
+    "    return results",
+    "",
+    "results = plot_corr_matrix(df, continuous_columns=numeric_features, target=\"Exited\", method=\"spearman\", threshold=0.3, remove_target=\"Exited\")"
+    ]
+},
+// =========================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+"optimize-dtypes in Large DataFrames": {
+    "prefix": "eda: optimize-dtypes",
+    "description": "Optimize DataFrame memory usage by downcasting and categoricals",
+    "body": [
+    "def optimize_dtypes(df):",
+    "    \"\"\"Optimize DataFrame memory usage by downcasting numeric types and converting strings to categories.\"\"\"",
+    "    initial_memory = df.memory_usage(deep=True).sum() / 1024**2",
+    "    # Downcast integers",
+    "    for col in df.select_dtypes(include=['int']).columns:",
+    "        df[col] = pd.to_numeric(df[col], downcast='integer')",
+    "    # Downcast floats",
+    "    for col in df.select_dtypes(include=['float']).columns:",
+    "        df[col] = pd.to_numeric(df[col], downcast='float')",
+    "    # Convert high-frequency strings to categorical",
+    "    for col in df.select_dtypes(include=['object', 'string']).columns:",
+    "        if df[col].nunique() < df.shape[0] * 0.5:  # Less than 50% unique",
+    "            df[col] = df[col].astype('category')",
+    "    final_memory = df.memory_usage(deep=True).sum() / 1024**2",
+    "    print(f\"Memory optimization: {initial_memory:.1f}MB → {final_memory:.1f}MB ({((initial_memory - final_memory) / initial_memory * 100):.1f}% reduction)\")",
+    "    return df",
+    "",
+    "# Usage example",
+    "df = optimize_dtypes(df)"
+    ]
+},
+
 }

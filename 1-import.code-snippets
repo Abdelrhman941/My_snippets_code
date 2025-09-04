@@ -25,7 +25,9 @@
         "import plotly.graph_objects as go",
         "import missingno as msno",
         "from matplotlib import cm",
-        "from IPython.display import clear_output"
+        "from IPython.display import clear_output",
+        "",
+        "sns.set_theme()"
     ],
     "description": "Core imports for data manipulation, visualization, and styling"
 },

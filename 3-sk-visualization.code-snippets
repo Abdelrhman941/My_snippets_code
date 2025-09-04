@@ -1,0 +1,32 @@
+{
+// Seaborn pairplot visualization
+"Pair Plot Numerical Features": {
+    "prefix": "viz: pairplot",
+    "description": "Apply pairplot on numerical features with hue and customization",
+    "body": [
+    "# -------- Pairplot Parameters --------",
+    "# data      : DataFrame (usually numeric features)",
+    "# hue       : Column for coloring (categorical target/class)",
+    "# diag_kind : Plot type on the diagonal ('hist' | 'kde' | 'auto')",
+    "# markers   : Shape of points (default 'o')",
+    "# palette   : Color palette (e.g. 'Set1', 'coolwarm')",
+    "# corner    : True = show only lower triangle (less clutter)",
+    "# height    : Size of each subplot (default 2.5)",
+    "# aspect    : Aspect ratio of subplots",
+    "# dropna    : Exclude rows with NaN",
+    "",
+    "sns.pairplot(",
+    "    df[${1:numeric_features}],",
+    "    hue='${4:target}',",
+    "    diag_kind='${2:kde}',",
+    "    markers='${3:o}',",
+    "    palette='${5:Set1}',",
+    "    corner=${6:True}",
+    ")",
+    "plt.show()",
+    "$0"
+    ]
+},
+// ================================================================================================================================
+
+}
