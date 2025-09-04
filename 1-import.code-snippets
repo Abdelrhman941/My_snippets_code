@@ -102,7 +102,7 @@
     "prefix": "imp: imbalanced",
     "body": [
         "from imblearn.over_sampling import SMOTE, RandomOverSampler, ADASYN, BorderlineSMOTE, KMeansSMOTE, SVMSMOTE",
-        "from imblearn.under_sampling import RandomUnderSampler, NearMiss",
+        "from imblearn.under_sampling import RandomUnderSampler, NearMiss, TomekLinks",
         "from imblearn.combine import SMOTETomek, SMOTEENN",
         "from collections import Counter"
     ],
