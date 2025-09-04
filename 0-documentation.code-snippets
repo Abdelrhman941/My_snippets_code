@@ -1,49 +1,59 @@
 {
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
     "Pandas Reference": {
         "prefix": "ref: pandas",
         "body": ["# https://pandas.pydata.org/docs/user_guide/index.html#user-guide"],
         "description": "Pandas official user guide"
     },
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
     "Matplotlib Reference": {
         "prefix": "ref: matplotlib",
         "body": ["https://matplotlib.org/stable/users/index.html"],
         "description": "Matplotlib official user guide"
     },
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
     "Seaborn Reference": {
         "prefix": "ref: seaborn",
         "body": ["https://seaborn.pydata.org/tutorial.html"],
         "description": "Seaborn tutorial"
     },
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
     "Scikit-Learn Reference": {
         "prefix": "ref: sklearn",
         "body": ["https://scikit-learn.org/stable/user_guide.html"],
         "description": "Scikit-Learn user guide"
     },
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
     "Imbalanced-Learn Reference": {
         "prefix": "ref: imbalanced-learn",
         "body": ["https://imbalanced-learn.org/stable/user_guide.html"],
         "description": "Imbalanced-learn user guide"
     },
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
     "PyTorch Reference": {
         "prefix": "ref: pytorch",
         "body": ["https://docs.pytorch.org/docs/stable/pytorch-api.html"],
         "description": "PyTorch API reference"
     },
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
     "spaCy Reference": {
         "prefix": "ref: spacy",
         "body": ["https://spacy.io/api"],
         "description": "spaCy API documentation"
     },
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
     "MySQL Reference": {
         "prefix": "ref: mysql",
         "body": ["https://dev.mysql.com/doc/refman/8.4/en/"],
         "description": "MySQL official reference manual"
     },
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
     "BeautifulSoup Reference": {
         "prefix": "ref: beautiful-soup",
         "body": ["https://beautiful-soup-4.readthedocs.io/en/latest/"],
         "description": "BeautifulSoup documentation"
     },
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
     "Streamlit Reference": {
         "prefix": "ref: streamlit",
         "body": ["https://docs.streamlit.io/library"],

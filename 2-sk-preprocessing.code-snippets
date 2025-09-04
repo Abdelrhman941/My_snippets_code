@@ -1,0 +1,58 @@
+{
+    // Scikit-learn data reading and loading utilities
+    // ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+    "Read CSV": {
+        "prefix": "read: sk-read-csv",
+        "description": "Read CSV file into pandas DataFrame with key parameters",
+        "body": [
+            "# 🔹 Commonly used parameters in pd.read_csv:",
+            "# sep=','              -> Column separator (',' default, use '\\t' for TSV)",
+            "# header=0             -> Row of column names (None if no header)",
+            "# names=[...]          -> Define column names manually",
+            "# index_col=0          -> Column to use as index",
+            "# usecols=[...]        -> Load only specific columns",
+            "# nrows=1000           -> Read only first N rows",
+            "# skiprows=5           -> Skip first 5 rows (or list of rows)",
+            "# na_values=['?']      -> Extra strings to treat as NaN",
+            "# dtype={'col': str}   -> Force data type for column",
+            "# parse_dates=['col']  -> Parse column(s) as datetime",
+            "# dayfirst=True        -> Dates in dd/mm/yyyy format",
+            "# encoding='utf-8'     -> File encoding ('latin1', 'cp1256' for Arabic)",
+            "# compression='zip'    -> If file is compressed",
+            "# chunksize=10000      -> Read file in chunks (returns iterator)",
+            "# on_bad_lines='skip'  -> Skip bad/invalid rows",
+            "",
+            "${1:df} = pd.read_csv('${2:data.csv}')",
+            "$1.head()",
+            "$0"
+        ]
+    },
+    //---------------------------------------------------------------------------------------------------------------
+    "Read Excel": {
+        "prefix": "read: sk-read-excel",
+        "description": "Read Excel file into pandas DataFrame with basic info",
+        "body": [
+            "${1:df} = pd.read_excel('${2:data.xlsx}')",
+            "print($1.info())",
+            "$0"
+        ]
+    },
+    "Read Feather": {
+        "prefix": "read: sk-read-feather",
+        "description": "Read Feather file into pandas DataFrame with basic info",
+        "body": [
+            "${1:df} = pd.read_feather('${2:data.feather}')",
+            "print($1.info())",
+            "$0"
+        ]
+    },
+    "Read Parquet": {
+        "prefix": "read: sk-read-parquet",
+        "description": "Read Parquet file into pandas DataFrame with basic info",
+        "body": [
+            "${1:df} = pd.read_parquet('${2:data.parquet}')",
+            "print($1.info())",
+            "$0"
+        ]
+    }
+}

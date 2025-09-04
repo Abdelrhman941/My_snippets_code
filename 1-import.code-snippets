@@ -1,4 +1,6 @@
 {
+
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Data Generation and Datasets": {
     "prefix": "imp: datasets",
     "body": [
@@ -6,12 +8,12 @@
         "# https://scikit-learn.org/stable/datasets.html",
         "# https://scikit-learn.org/stable/api/sklearn.datasets.html#module-sklearn.datasets",
         "",
-        "from sklearn.datasets import load_iris, load_breast_cancer, load_digits, make_classification, make_moons, make_circles, fetch_california_housing",
-        "from sklearn import datasets"
+        "from sklearn.datasets import load_iris, load_breast_cancer, load_digits, make_classification, make_moons, make_circles, fetch_california_housing"
     ],
     "description": "Imports for loading sample datasets and generating synthetic data for testing."
 },
 // ================================================================================================================================
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Basic Imports": {
     "prefix": "imp: basic",
     "body": [
@@ -69,7 +71,8 @@
         "from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, GradientBoostingClassifier, BaggingClassifier, VotingClassifier, StackingClassifier",
         "from sklearn.svm import SVC",
         "from xgboost import XGBClassifier",
-        "from sklearn.multioutput import MultiOutputClassifier, OneVsRestClassifier",
+        "from sklearn.multioutput import MultiOutputClassifier",
+        "from sklearn.multiclass import OneVsRestClassifier",
         "from imblearn.ensemble import EasyEnsembleClassifier"
     ],
     "description": "Imports for classification algorithms, including linear, tree-based, ensemble, and specialized models."
