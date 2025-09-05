@@ -1,3 +1,98 @@
 {
-
+"Train Test Split": {
+    "prefix": "sk: train_test_split",
+    "description": "Split dataset into training and testing sets",
+    "body": [
+        "X = df.drop(target_name, axis=1)",
+        "y = df[target_name]",
+        "",
+        "X_train, X_test, y_train, y_test = train_test_split(${1:X}, ${2:y}, test_size=${3:0.2}, random_state=${4:42}, stratify=${5:None})",
+        "",
+        "print(f\"X_train shape: {X_train.shape}\")",
+        "print(f\"X_test  shape: {X_test.shape}\")",
+        "print(f\"y_train shape: {y_train.shape}\")",
+        "print(f\"y_test  shape: {y_test.shape}\")",
+        "print(f\"\\nMissing values:\")",
+        "print(f\"X_train : {X_train.isnull().sum().sum()}\")",
+        "print(f\"X_test  : {X_test.isnull().sum().sum()}\")",
+        "print(f\"y_train : {y_train.isnull().sum().sum()}\")",
+        "print(f\"y_test  : {y_test.isnull().sum().sum()}\")"
+    ]
+},
+// =========================
+"OneHot Encoding": {
+    "prefix": "sk: OneHot Encoding",
+    "body": [
+        "from sklearn.preprocessing import OneHotEncoder",
+        "",
+        "encoder = OneHotEncoder(sparse=False, drop='first')  # drop='first' avoids multicollinearity",
+        "encoded = encoder.fit_transform(df[['${1:category}']])"
+    ],
+    "description": "One-Hot Encoding with sklearn"
+},
+// =========================
+"Label Encoding": {
+    "prefix": "sk: Label Encoding",
+    "body": [
+        "from sklearn.preprocessing import LabelEncoder",
+        "",
+        "le = LabelEncoder()",
+        "df['${1:encoded}'] = le.fit_transform(df['${2:category}'])"
+    ],
+    "description": "Label Encoding"
+},
+// =========================
+"Ordinal Encoding": {
+    "prefix": "sk: Ordinal Encoding",
+    "body": [
+        "from sklearn.preprocessing import OrdinalEncoder",
+        "",
+        "df['category'].unique()",
+        "oe = OrdinalEncoder(categories=[[${1:'Small'}, ${2:'Medium'}, ${3:'Large'}]])",
+        "df_encoded = oe.fit_transform(df[['${4:category}']])"
+    ],
+    "description": "Ordinal Encoding with explicit order"
+},
+// =========================
+"Binary Encoding": {
+    "prefix": "sk: Binary Encoding",
+    "body": [
+        "import category_encoders as ce",
+        "",
+        "binary_encoder = ce.BinaryEncoder(cols=['${1:category}'])",
+        "df_encoded = binary_encoder.fit_transform(df)"
+    ],
+    "description": "Binary Encoding"
+},
+// =========================
+"Target Encoding": {
+    "prefix": "sk: Target Encoding",
+    "body": [
+        "import category_encoders as ce",
+        "",
+        "target_encoder = ce.TargetEncoder(cols=['${1:category}'], smoothing=1.0)",
+        "df_encoded = target_encoder.fit_transform(df['${1:category}'], df['${2:target}'])"
+    ],
+    "description": "Target/Mean Encoding"
+},
+// =========================
+"Frequency Encoding": {
+    "prefix": "sk: Frequency Encoding",
+    "body": [
+        "freq_map = df['${1:category}'].value_counts().to_dict()",
+        "df['${1:category}_freq'] = df['${1:category}'].map(freq_map)"
+    ],
+    "description": "Frequency/Count Encoding"
+},
+// =========================
+"Hash Encoding": {
+    "prefix": "sk: Hash Encoding",
+    "body": [
+        "import category_encoders as ce",
+        "",
+        "hash_encoder = ce.HashingEncoder(cols=['${1:category}'], n_components=${2:8})",
+        "df_encoded = hash_encoder.fit_transform(df)"
+    ],
+    "description": "Hash Encoding"
+}
 }
