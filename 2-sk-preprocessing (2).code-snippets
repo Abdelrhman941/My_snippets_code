@@ -1,0 +1,195 @@
+// =============================================================================================================================
+//                                          Missing Values Handling Code Sections
+// =============================================================================================================================
+// Statistical Approaches (Basic)
+// - Statistical Methods        -> eda: [1.1] missing_values        (mode for categorical, mean/median for numerical)
+
+// Time Series & Interpolation
+// - Basic Interpolation        -> eda: [1.2] missing_timeseries    (ffill, bfill, time/linear interpolation)
+// - All Interpolation Methods  -> eda: [1.3] interpolation_methods (linear, polynomial, spline, nearest, etc.)
+
+// Machine Learning Approaches
+// - Simple Imputer             -> sk-prep: [2.1] simple_imputer    (mean, median, most_frequent, constant)
+// - Advanced ML Imputers       -> sk-prep: [2.2] advanced_imputer  (IterativeImputer, KNNImputer)
+
+// Visualization & Comparison
+// - Missing Values Comparison  -> eda: [3] missing_plot            (compare original vs filled values visualization)
+// ================================================================================================================================
+{
+"Missing Values Statistical approaches": {
+    "prefix": "eda: [1.1] missing_values",
+    "description": "Handle missing values in categorical, numerical, and discrete features (Statistical Approaches)",
+    "body": [
+        "## -------- For categorical columns -------- ##",
+        "df['Category_Mode'].fillna(df['Category_Mode'].mode().iloc[0], inplace=True)    # Fill with Mode",
+        "df['Category_Unknown'].fillna('Unknown', inplace=True)                          # Fill with 'Unknown'",
+        "",
+        "## -------- For numerical columns -------- ##",
+        "df['Num_Normal'].fillna(df['Num_Normal'].mean(), inplace=True)                  # Fill with Mean   (for normal distribution)",
+        "df['Num_Skewed'].fillna(df['Num_Skewed'].median(), inplace=True)                # Fill with Median (for skewed distribution)",
+        "df['Num_Discrete'].fillna(df['Num_Discrete'].mode().iloc[0], inplace=True)      # Fill with Mode   (for discrete values)",
+        "",
+        "## -------- Summary -------- ##",
+        "df.isnull().sum().to_frame().rename(columns={0:'Total No. of Missing Values'})"
+    ]
+},
+// =========================
+"Missing Values Interpolation": {
+    "prefix": "eda: [1.2] missing_timeseries",
+    "description": "Handle missing values in time series and continuous numerical columns (basic interpolation)",
+    "body": [
+        "## -------- For Time Series columns -------- ##",
+        "df['Time_Series_1'].fillna(method='ffill', inplace=True)                    # Forward  fill (carry last observation forward)",
+        "df['Time_Series_2'].fillna(method='bfill', inplace=True)                    # Backward fill (propagate next observation backward)",
+        "# Interpolation: 'time' if index is datetime, otherwise 'linear'",
+        "if isinstance(df.index, pd.DatetimeIndex):",
+        "    df['Time_Series_3'] = df['Time_Series_3'].interpolate(method='time')    # Uses datetime-aware interpolation",
+        "else:",
+        "    df['Time_Series_3'] = df['Time_Series_3'].interpolate(method='linear')  # Linear interpolation for numeric index",
+        "",
+        "## -------- For continuous numerical columns -------- ##",
+        "df['Num_Normal'].interpolate(method='linear', inplace=True)                 # Linear interpolation (numeric)",
+        "",
+        "## -------- Summary -------- ##",
+        "df.isnull().sum().to_frame().rename(columns={0:'Total No. of Missing Values'})"
+    ]
+},
+// =========================
+"Missing Values Impute (Simple)": {
+    "prefix": "sk-prep: [2.1] simple_imputer",
+    "description": "Impute missing values with SimpleImputer (mean, median, most_frequent, constant)",
+    "body": [
+        "from sklearn.impute import SimpleImputer",
+        "",
+        "# Choose strategy: mean (for normal), median (for skewed), most_frequent (for categorical), constant (custom value)",
+        "${1:imputer} = SimpleImputer(strategy='${2|mean,median,most_frequent,constant|}', fill_value=${3:None})",
+        "${4:X_imputed} = $1.fit_transform(${5:X})",
+        "$0"
+    ]
+},
+// =========================
+"Missing Values Impute (Advanced)": {
+    "prefix": "sk-prep: [2.2] advanced_imputer",
+    "description": "Impute missing values with advanced ML-based imputers (IterativeImputer, KNNImputer)",
+    "body": [
+        "## -------- Iterative Imputer (Multivariate) -------- ##",
+        "from sklearn.experimental import enable_iterative_imputer  # noqa",
+        "from sklearn.impute import IterativeImputer",
+        "",
+        "iter_imputer = IterativeImputer(max_iter=10, random_state=0)",
+        "X_iter_imputed = iter_imputer.fit_transform(X)",
+        "",
+        "## -------- KNN Imputer (Similarity-based) -------- ##",
+        "from sklearn.impute import KNNImputer",
+        "",
+        "knn_imputer = KNNImputer(n_neighbors=${1:5})",
+        "X_knn_imputed = knn_imputer.fit_transform(X)",
+        "$0"
+    ]
+},
+// =========================
+"Interpolation Methods (All cases)": {
+    "prefix": "eda: [1.3] interpolation_methods",
+    "description": "Interpolation methods for different use cases with short explanations",
+    "body": [
+        "## -------- Interpolation Methods -------- ##",
+        "# 1. Linear interpolation (default, numeric index)",
+        "df['col'] = df['col'].interpolate(method='linear')",
+        "",
+        "# 2. Time interpolation (requires DatetimeIndex)",
+        "df['col'] = df['col'].interpolate(method='time')",
+        "",
+        "# 3. Polynomial interpolation (fit polynomial curve, degree can be tuned)",
+        "df['col'] = df['col'].interpolate(method='polynomial', order=2)",
+        "",
+        "# 4. Spline interpolation (smooth curves, specify order)",
+        "df['col'] = df['col'].interpolate(method='spline', order=3)",
+        "",
+        "# 5. Nearest interpolation (assigns nearest known value, for discrete data also)",
+        "df['col'] = df['col'].interpolate(method='nearest')",
+        "",
+        "# 6. Pad/Forward Fill",
+        "df['col'] = df['col'].fillna(method='ffill')",
+        "",
+        "# 7. Backward Fill",
+        "df['col'] = df['col'].fillna(method='bfill')"
+    ]
+},
+// =========================
+"Missing Values Comparison Plot": {
+    "prefix": "eda: [3] missing_plot",
+    "description": "Function to compare original vs filled values for columns with missing value handling",
+    "body": [
+        "def plot_missing_values_comparison(df_original, df_filled, columns=None, figsize=(15, 8)):",
+        "    if columns is None:",
+        "        # Identify columns where missing counts changed (handled columns)",
+        "        cols_with_changes = []",
+        "        for col in df_original.columns:",
+        "            if df_original[col].isnull().sum() != df_filled[col].isnull().sum():",
+        "                cols_with_changes.append(col)",
+        "        columns = cols_with_changes",
+        "    if not columns:",
+        "        print(\"No columns with missing value handling detected!\")",
+        "        return",
+        "",
+        "    # Keep only numeric columns for plotting",
+        "    numeric_cols = [col for col in columns if pd.api.types.is_numeric_dtype(df_original[col])]",
+        "    n_cols = len(numeric_cols)",
+        "    n_rows = (n_cols + 1) // 2  # 2 plots per row",
+        "",
+        "    fig, axes = plt.subplots(n_rows, 2, figsize=figsize)",
+        "    if n_rows == 1:",
+        "        axes = [axes] if n_cols == 2 else [[axes, None]]",
+        "    elif n_cols == 1:",
+        "        axes = [[axes[0], None]]",
+        "",
+        "    for i, col in enumerate(numeric_cols):",
+        "        row = i // 2",
+        "        col_idx = i % 2",
+        "        ax = axes[row][col_idx]",
+        "",
+        "        # Original vs filled data",
+        "        original_data = df_original[col].copy()",
+        "        filled_data = df_filled[col].copy()",
+        "",
+        "        # Plot filled values",
+        "        ax.plot(filled_data.index, filled_data, label='Filled Values', color='lightblue', linewidth=2, alpha=0.7)",
+        "",
+        "        # Plot non-missing original values",
+        "        non_missing_mask = ~original_data.isnull()",
+        "        ax.plot(",
+        "            original_data[non_missing_mask].index,",
+        "            original_data[non_missing_mask],",
+        "            label='Original Values',",
+        "            color='darkblue', marker='o', markersize=4, linestyle='None', alpha=0.8",
+        "        )",
+        "",
+        "        # Highlight imputed values",
+        "        missing_mask = original_data.isnull()",
+        "        if missing_mask.sum() > 0:",
+        "            ax.plot(",
+        "                filled_data[missing_mask].index,",
+        "                filled_data[missing_mask],",
+        "                label=f'Imputed ({missing_mask.sum()} values)',",
+        "                color='red', marker='x', markersize=6, linestyle='None', alpha=0.9",
+        "            )",
+        "",
+        "        ax.set_title(f'{col} (Missing: {missing_mask.sum()}/{len(original_data)})')",
+        "        ax.set_xlabel('Index')",
+        "        ax.set_ylabel('Value')",
+        "        ax.legend(fontsize=9)",
+        "        ax.grid(True, alpha=0.3)",
+        "",
+        "    # Hide empty subplots",
+        "    if n_cols % 2 == 1 and n_rows > 1:",
+        "        axes[-1][-1].set_visible(False)",
+        "    elif n_cols == 1:",
+        "        axes[0][1].set_visible(False)",
+        "",
+        "    plt.tight_layout()",
+        "    plt.show()",
+        "",
+        "plot_missing_values_comparison(df, df1)         # df1 = df.copy() before handling missing values"
+    ]
+}
+}
