@@ -94,5 +94,116 @@
         "df_encoded = hash_encoder.fit_transform(df)"
     ],
     "description": "Hash Encoding"
+},
+// =========================
+"Selective Scaling Function": {
+    "prefix": "sk: Scaling",
+    "body": [
+        "def selective_scaling(X_train: pd.DataFrame, X_test: pd.DataFrame, threshold=100):",
+        "    # Only select numeric columns (exclude categorical/object)",
+        "    candidate_cols = [col for col in X_train.columns if not col.startswith(\"cat__high_card__\") and pd.api.types.is_numeric_dtype(X_train[col])]",
+        "",
+        "    range_per_col = (X_train[candidate_cols].max() - X_train[candidate_cols].min()).sort_values(ascending=False)",
+        "    display(range_per_col)",
+        "",
+        "    cols_to_scale = range_per_col[range_per_col > threshold].index.tolist()",
+        "    print(\"Columns to scale:\", cols_to_scale if cols_to_scale else \"None ✅\")",
+        "",
+        "    scaler = StandardScaler()",
+        "    X_train_scaled = X_train.copy()",
+        "    X_test_scaled  = X_test.copy()",
+        "",
+        "    if cols_to_scale:",
+        "        X_train_scaled[cols_to_scale] = scaler.fit_transform(X_train[cols_to_scale])",
+        "        X_test_scaled[cols_to_scale]  = scaler.transform(X_test[cols_to_scale])",
+        "",
+        "    return X_train_scaled, X_test_scaled, cols_to_scale, scaler",
+        "",
+        "# Example usage:",
+        "X_train, X_test, _, _ = selective_scaling(X_train, X_test)"
+    ],
+    "description": "Scale only numeric columns with range above a given threshold"
+},
+// =========================
+"MinMax Scaler": {
+    "prefix": "sk: MinMaxScaler",
+    "body": [
+    "from sklearn.preprocessing import MinMaxScaler",
+    "",
+    "scaler = MinMaxScaler(feature_range=(0,1))",
+    "X_train_scaled = scaler.fit_transform(X_train)",
+    "X_test_scaled  = scaler.transform(X_test)"
+    ],
+    "description": "Scale features to [0,1] range — good for NN/KNN, distance-based models"
+},
+// =========================
+"Standard Scaler": {
+    "prefix": "sk: StandardScaler",
+    "body": [
+    "from sklearn.preprocessing import StandardScaler",
+    "",
+    "scaler = StandardScaler()",
+    "X_train_scaled = scaler.fit_transform(X_train)",
+    "X_test_scaled  = scaler.transform(X_test)"
+    ],
+    "description": "Center data to mean=0, std=1 — works well if data ~ normal"
+},
+// =========================
+"Robust Scaler": {
+    "prefix": "sk: RobustScaler",
+    "body": [
+    "from sklearn.preprocessing import RobustScaler",
+    "",
+    "scaler = RobustScaler()",
+    "X_train_scaled = scaler.fit_transform(X_train)",
+    "X_test_scaled  = scaler.transform(X_test)"
+    ],
+    "description": "Scale using median & IQR — robust to heavy outliers"
+},
+// =========================
+"Power Transformer": {
+    "prefix": "sk: PowerTransformer",
+    "body": [
+    "from sklearn.preprocessing import PowerTransformer",
+    "",
+    "scaler = PowerTransformer(method='yeo-johnson')  # 'box-cox' requires positive values",
+    "X_train_scaled = scaler.fit_transform(X_train)",
+    "X_test_scaled  = scaler.transform(X_test)"
+    ],
+    "description": "Stabilize variance & reduce skewness — makes data Gaussian-like"
+},
+// =========================
+"Log Transform": {
+    "prefix": "sk: LogTransform",
+    "body": [
+        "import numpy as np",
+        "",
+        "X_train_log = np.log1p(X_train)  # log(1+x) avoids issues with zero",
+        "X_test_log  = np.log1p(X_test)"
+    ],
+    "description": "Use log for right-skewed data"
+},
+// =========================
+"Square Root Transform": {
+    "prefix": "sk: SqrtTransform",
+    "body": [
+        "import numpy as np",
+        "",
+        "X_train_sqrt = np.sqrt(X_train)",
+        "X_test_sqrt  = np.sqrt(X_test)"
+    ],
+    "description": "Use sqrt for moderate right skew"
+},
+// =========================
+"BoxCox Transform": {
+    "prefix": "sk: BoxCoxTransform",
+    "body": [
+    "from sklearn.preprocessing import PowerTransformer",
+    "",
+    "scaler = PowerTransformer(method='box-cox')  # requires all positive values",
+    "X_train_scaled = scaler.fit_transform(X_train)",
+    "X_test_scaled  = scaler.transform(X_test)"
+    ],
+    "description": "Box-Cox finds optimal λ automatically — best for skewed positive data"
 }
 }
