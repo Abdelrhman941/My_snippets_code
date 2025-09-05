@@ -1,5 +1,45 @@
+// =============================================================================================================================
+//                                                  EDA Code Sections
+// =============================================================================================================================
+// Data Reading
+// - Read CSV               -> read: sk-read-csv (With commonly used parameters)
+// - Read Excel             -> read: sk-read-excel
+// - Read Feather           -> read: sk-read-feather
+// - Read Parquet           -> read: sk-read-parquet
+
+// Basic EDA
+// - Basic EDA Summary      -> eda: (1) Quick   (shape, columns, info, describe, missing, duplicates)
+// - Optimize DataFrame     -> eda: optimize_df (memory optimization, dtypes conversion)
+// - Large Variables        -> vars: manage     (show & delete large variables)
+// - Drop Operations        -> eda: Drop        (drop columns or rows from DataFrame)
+
+// Target & Distribution Analysis
+// - Target Distribution    -> eda: (2) target-distribution         (classification/regression plots)
+// - Column Types Summary   -> eda: (3) col-types                   (identify numerical & categorical)
+// - Numeric Distributions  -> eda: (4.1) numeric-distribution      (countplot/KDE based on threshold)
+// - Numeric Grid Plot      -> eda: (4.2) numeric_grid              (grid layout distributions)
+// - Continuous by Target   -> eda: (4.3) one continuous to target  (histogram + boxplot)
+
+// Data Quality & Missing Values
+// - Missing Values Report  -> eda: (5) missing_df                  (count, percentage, colored by type)
+
+// Correlation Analysis
+// - Correlation Matrix     -> eda: (6) corr-matrix                 (heatmap with high correlation analysis)
+
+// Categorical Analysis
+// - Categorical Summary    -> eda: (7) cat-summary                 (top categories with plots)
+// - Split by Cardinality   -> eda: (8) split_cat_card              (low/medium/high cardinality)
+
+// Outlier Analysis
+// - OutlierHandler Class   -> eda: (9.1) OutlierHandler            (OOP approach for outlier handling)
+// - Outlier Detection      -> eda: (9.2) outliers detect           (IQR, Z-score, Isolation Forest, etc.)
+// - Outlier Handling       -> eda: (9.3) outliers Handling         (remove, cap, transform methods)
+
+// Feature Engineering
+// - Binning Operations     -> eda: Binning                         (convert numerical to categorical bins)
+// - Skewness Analysis      -> eda: skew                            (analyze and visualize skewness with transformations)
+// ================================================================================================================================
 {
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Read CSV": {
     "prefix": "read: sk-read-csv",
     "description": "Read CSV file into pandas DataFrame with key parameters",
@@ -52,8 +92,7 @@
         "print($1.info())",
     ]
 },
-// ================================================================================================================================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+// =========================
 "Basic EDA Summary": {
     "prefix": "eda: (1) Quick",
     "description": "Perform basic exploratory data analysis (EDA) on a DataFrame, including shape, columns, info, summary stats, unique values, missing values, and duplicates",
@@ -83,7 +122,6 @@
     ]
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Optimize DataFrame Dtypes": {
     "prefix": "eda: optimize_df",
     "description": "Optimize DataFrame memory usage: numeric downcast, categorical, boolean conversion (no datetime auto-conversion).",
@@ -142,7 +180,6 @@
     ]
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Show & Delete Large Variables": {
     "prefix": "vars: manage",
     "description": "Show variables larger than X MB and optionally bulk delete them",
@@ -204,7 +241,6 @@
     ]
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Drop columns or rows from DataFrame": {
     "prefix": "eda: Drop",
     "description": "Drop columns or rows from DataFrame",
@@ -219,7 +255,6 @@
     ]
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Target Distribution Plot": {
     "prefix": "eda: (2) target-distribution",
     "description": "Plot target distribution for classification or regression with optional log scale for classification",
@@ -266,7 +301,6 @@
     ]
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Get Column Types Summary": {
     "prefix": "eda: (3) col-types",
     "description": "Identify numerical and categorical columns in DataFrame with summary",
@@ -299,7 +333,6 @@
     ] 
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Plot Numeric Distributions (1)": {
     "prefix": "eda: (4.1) numeric-distribution",
     "description": "Plot distributions of numeric features (countplot for discrete, KDE for continuous)",
@@ -330,7 +363,6 @@
     ]
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Plot Numeric Distributions (2)": {
     "prefix": "eda: (4.2) numeric_grid",
     "description": "Plot distributions of numeric features in a grid layout",
@@ -354,7 +386,6 @@
     ]
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "plot continuous by target": {
     "prefix": "eda: (4.3) one continuous to target",
     "description": "Plot histogram and boxplot side-by-side for continuous feature by target",
@@ -379,7 +410,6 @@
     ]
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "missing values count, percentage": {
     "prefix": "eda: (5) missing_df",
     "description": "Show data quality with missing values count, percentage, and colored type column",
@@ -411,11 +441,14 @@
     "        print(\"No missing values detected.\")",
     "    return missing_df",
     "",
-    "missing_df = data_quality(df)"
+    "missing_df = data_quality(df)",
+    "",
+    "high_cols_clean  = missing_df[missing_df['Missing_Percentage'] > 50].index.tolist()",
+    "print(f\"Dropping columns with >50% missing: \\n{high_cols_clean}\\n\")",
+    "df.drop(columns=high_cols_clean, inplace=True)"
     ]
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "correlation matrix": {
     "prefix": "eda: (6) corr-matrix",
     "description": "Plot correlation matrix heatmap with optional column removal and high correlation analysis",
@@ -463,6 +496,8 @@
     "        for j in range(i+1, len(corr_matrix.columns)):",
     "            col1, col2 = corr_matrix.columns[i], corr_matrix.columns[j]",
     "            corr_val = corr_matrix.iloc[i, j]",
+    "            if target and (col1 == target or col2 == target):",
+    "                continue",
     "            if abs(corr_val) >= threshold:",
     "                high_corr_pairs.append((col1, col2, corr_val))",
     "    if high_corr_pairs:",
@@ -477,7 +512,6 @@
     ]
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Categorical Summary & Plot": {
     "prefix": "eda: (7) cat-summary",
     "description": "Print top categories with 'others', percentages, and plot countplots",
@@ -509,7 +543,6 @@
     ]
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Split Categorical by Cardinality": {
     "prefix": "eda: (8) split_cat_card",
     "description": "Split categorical columns into low, medium, high cardinality and detect numeric columns",
@@ -538,18 +571,17 @@
     ]
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "OutlierHandler OOP": {
     "prefix": "eda: (9.1) OutlierHandler",
-    "description": "Class for outlier detection, visualization, and capping using IQR",
+    "description": "Class for outlier detection, visualization, and handling (capping or interpolation) using IQR",
     "body": [
     "class OutlierHandler:",
-    "    \"\"\"A class to handle outlier detection, visualization, and capping using IQR method.\"\"\"",
+    "    \"\"\"A class to handle outlier detection, visualization, and handling using IQR method.\"\"\"",
     "    def __init__(self, df, numerical_cols):",
     "        self.df = df.copy()",
     "        self.numerical_cols = numerical_cols",
     "        print(f\"Initialized OutlierHandler with {len(self.numerical_cols)} numerical columns.\")",
-    "    ",
+    "",
     "    def detect_outliers_iqr(self, feature):",
     "        Q1 = self.df[feature].quantile(0.25)",
     "        Q3 = self.df[feature].quantile(0.75)",
@@ -557,7 +589,7 @@
     "        lower_bound = Q1 - 1.5 * IQR",
     "        upper_bound = Q3 + 1.5 * IQR",
     "        return self.df[(self.df[feature] < lower_bound) | (self.df[feature] > upper_bound)]",
-    "    ",
+    "",
     "    def plot_outliers(self, n_cols=6, color='skyblue'):",
     "        import math",
     "        n_rows = math.ceil(len(self.numerical_cols) / n_cols)",
@@ -568,7 +600,7 @@
     "            plt.title(f'Box Plot - {col}')",
     "        plt.tight_layout()",
     "        plt.show()",
-    "    ",
+    "",
     "    def cap_outliers_iqr(self):",
     "        for feature in self.numerical_cols:",
     "            Q1 = self.df[feature].quantile(0.25)",
@@ -581,23 +613,44 @@
     "                np.where(self.df[feature] > upper_bound, upper_bound, self.df[feature])",
     "            )",
     "        return self.df",
-    "    ",
+    "",
+    "    def interpolate_outliers(self, method='linear'):",
+    "        for feature in self.numerical_cols:",
+    "            Q1 = self.df[feature].quantile(0.25)",
+    "            Q3 = self.df[feature].quantile(0.75)",
+    "            IQR = Q3 - Q1",
+    "            lower_bound = Q1 - 1.5 * IQR",
+    "            upper_bound = Q3 + 1.5 * IQR",
+    "",
+    "            # Replace outliers with NaN",
+    "            self.df[feature] = self.df[feature].apply(",
+    "                lambda x: np.nan if x < lower_bound or x > upper_bound else x",
+    "            )",
+    "            # Fill outliers using interpolation",
+    "            self.df[feature] = self.df[feature].interpolate(method=method, limit_direction='both')",
+    "        return self.df",
+    "",
     "    def summary_outliers(self):",
     "        \"\"\"Print number of outliers in each numerical column.\"\"\"",
     "        for col in self.numerical_cols:",
     "            outliers = self.detect_outliers_iqr(col)",
     "            print(f\"{col:<17}: {len(outliers):<5} outliers\")",
     "",
-    "# Usage example:",
+    "# ================= Usage Example =================",
     "handler = OutlierHandler(df, numeric_features[:-1])  # exclude target if needed",
     "handler.plot_outliers(n_cols=4)",
     "handler.summary_outliers()",
-    "df = handler.cap_outliers_iqr()",
+    "",
+    "# --- Option 1: Cap outliers ---",
+    "df_capped = handler.cap_outliers_iqr()",
+    "handler.summary_outliers()",
+    "",
+    "# --- Option 2: Interpolate outliers ---",
+    "df_interpolated = handler.interpolate_outliers(method='linear')  # or 'spline', 'polynomial'",
     "handler.summary_outliers()"
     ]
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Outlier Detection Methods": {
     "prefix": "eda: (9.2) outliers detect",
     "description": "Detect outliers using IQR, Z-score, Modified Z-score, Isolation Forest, DBSCAN",
@@ -633,7 +686,6 @@
     ]
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Outlier Handling Methods": {
     "prefix": "eda: (9.3) outliers Handling",
     "description": "Remove, cap/floor, or transform outliers in a DataFrame column",
@@ -665,17 +717,16 @@
     ]
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "Binning": {
     "prefix": "eda: Binning",
     "description": "Class for binning numerical features into categorical bins",
     "body": [
+    "old_col = df['feature']",
     "# Convert to categories",
-    "df['feature_binned'] = pd.cut(df['feature'], bins=5, labels=['Low', 'Med-Low', 'Med', 'Med-High', 'High'])",
+    "df['feature'] = pd.cut(df['feature'], bins=5, labels=['Low', 'Med-Low', 'Med', 'Med-High', 'High'])",
     ]
 },
 // =========================
-// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
 "skew analysis": {
     "prefix": "eda: skew",
     "description": "Analyze skewness of numeric features and optionally visualize log transformation effect.",
@@ -695,6 +746,7 @@
         "# Optional: visualize log transformation effect for a feature",
         "# old_val = df['feature']",
         "# df['feature'] = np.log1p(df['feature'])  # log(1+x) to handle zeros",
+        "# new_val = df['feature']",
         "#",
         "# import matplotlib.pyplot as plt",
         "# import seaborn as sns",
@@ -704,7 +756,7 @@
         "# plt.title('Feature Distribution Before Transformation', fontweight='black', size=18, pad=20)",
         "#",
         "# plt.subplot(1,2,2)",
-        "# sns.histplot(df['feature'], color='purple', kde=True)",
+        "# sns.histplot(new_val, color='purple', kde=True)",
         "# plt.title('Feature Distribution After Transformation', fontweight='black', size=18, pad=20)",
         "# plt.tight_layout()",
         "# plt.show()"
